@@ -8,6 +8,7 @@
     "start": "npx nodemon server"
   },
   "author": "Niklas. Georgios",
+  "liveshare.guestApprovalRequired": true,
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
