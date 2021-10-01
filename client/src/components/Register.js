@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-function Users() {
+function Register() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("/users/")
+    fetch("/register/")
       .then((res) => res.json())
       .then((data) => setUsers(data.message));
   });
@@ -16,4 +16,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default Register;

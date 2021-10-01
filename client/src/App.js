@@ -1,5 +1,7 @@
 import "./App.css";
-import Users from "./components/Users";
+import Register from "./components/Register";
+import TodoPage from "./components/TodoPage";
+import Login from "./components/Login";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
@@ -7,12 +9,16 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Switch>
-          <Route path="/users/">
-            <Users />
+          <Route path="/todoPage/">
+            <TodoPage />
+          </Route>
+
+          <Route path="/register/">
+            <Register />
           </Route>
 
           <Route path="/">
-            <p>Hello! First page!</p>
+            <Login />
           </Route>
         </Switch>
       </header>
