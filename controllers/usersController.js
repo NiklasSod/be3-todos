@@ -5,10 +5,9 @@ exports.showRegisterPage = (req, res) => {
 };
 
 exports.registerUser = (req, res) => {
-  console.log(req.body);
-  let name = "kalle";
-  let email = "kalle@email.se";
-  let password = "kalleanka";
+  let name = req.body.name;
+  let email = req.body.email;
+  let password = req.body.password;
 
   const newUser = new User({
     name,

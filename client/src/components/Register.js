@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 function Register() {
-  const [users, setUsers] = useState([]);
+  const [setData, getData] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -10,9 +10,9 @@ function Register() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/register")
+    fetch("http://localhost:3001/register/")
       .then((res) => res.json())
-      .then((data) => setUsers(data.message));
+      .then((data) => getData(data.message));
   });
 
   function handleOnChange(e) {
@@ -23,12 +23,26 @@ function Register() {
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    history.push("/todoPage");
+
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    fetch("http://localhost:3001/register/", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    history.push("/");
   }
 
   return (
     <div>
-      <p>{!users ? "Loading..." : users}</p>
+      <p>{!setData ? "Loading..." : setData}</p>
       <h1 className="ml-2 mt-2">Please register!</h1>
       <br />
       <form onSubmit={handleOnSubmit}>
@@ -61,9 +75,11 @@ function Register() {
         />
         <p className="col-md-5" />
         <br />
-        <button className="col-md-2 btn btn-primary" type="submit">
-          Submit
-        </button>
+        <input
+          className="col-md-2 btn btn-primary"
+          type="submit"
+          value="Submit"
+        />
       </form>
     </div>
   );
