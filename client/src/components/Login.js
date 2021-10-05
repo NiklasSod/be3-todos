@@ -23,6 +23,8 @@ function Login() {
     <div>
       <h1 className="ml-2 mt-2">Please log in!</h1>
       <br />
+      <button className="col-md-2 btn btn-primary" id="login" type="submit">Login</button>
+      <button className="col-md-2 btn btn-primary" id = "register"type="submit">Register</button>
       <form onSubmit={handleOnSubmit}>
         <label className="col-md-2">Email:</label>
         <input
@@ -45,12 +47,13 @@ function Login() {
         <p className="col-md-5" />
         <br />
         <button className="col-md-2 btn btn-primary" type="submit">
-          Log In
+          Submit
         </button>
         <button className="" type="">
           <Link to="/register"> Register </Link>
         </button>
       </form>
+        
     </div>
   );
 }
