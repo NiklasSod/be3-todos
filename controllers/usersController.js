@@ -1,35 +1,41 @@
+const User = require("./../models/users");
+
 exports.showRegisterPage = (req, res) => {
   res.json({ message: "Hello from registerpage!" });
 };
 
-exports.registerUser = (req, res) => {};
+exports.registerUser = (req, res) => {
+  console.log(req.body);
+  let name = "kalle";
+  let email = "kalle@email.se";
+  let password = "kalleanka";
 
-// router.post('/register', (req, res) => {
-//   const {name, password} = req.body
-//   const errors = []
-//   if (name.length < 3 || name.length > 12) {
-//       errors.push({msg: 'Name length must be between three and twelve characters long.'})
-//   } if (password.length < 6) {
-//       errors.push({msg: 'Password must be at least six characters long.'})
-//   } if(errors.length > 0) {
-//       res.render('register', {errors})
-//   } else {
-//       const newUser = new User({
-//           name, password
-//       })
+  const newUser = new User({
+    name,
+    email,
+    password,
+  });
 
-//       bcrypt.hash(password, 10, (err, hash) => {
-//           newUser.password = hash
-//           newUser
-//               .save()
-//               .then(value => {
-//                   req.flash('success_msg', 'You are registered to Slacky!')
-//                   res.redirect('/')
-//               })
-//               .catch(err => {
-//                   req.flash('error_msg', 'Username already exists!')
-//                   res.redirect('/register')
-//               })
-//       })
+  newUser.save();
+  return res.status(200).json({ msg: newUser });
+};
+
+// app.get('/createuser', function(req, res){
+
+//   var user = new User();
+
+//   user.name = req.body.name;
+//   user.city = req.body.city;
+
+//   if(req.body.type == "typeA"){
+//       user.accounts.typeA.isUser = true;
 //   }
-// })
+//   if(type == "typeB"){
+//       user.accounts.typeB.isUser = true;
+//   }
+
+//   user.save(function(err, user){
+//       if(err) return err;
+//       res.send(user);
+//   });
+// });

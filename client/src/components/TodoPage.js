@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 function TodoPage() {
-  const [list, setList] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("/todoPage/")
+    fetch("/todoPage/", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setList(data.message));
+      .then((data) => setData(data.message));
   });
 
   return (
     <div>
       <p>Here is todos!</p>
-      <p>{list}</p>
+      <p>{!data ? "test-string" : data}</p>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -45,6 +46,9 @@ function Login() {
         <br />
         <button className="col-md-2 btn btn-primary" type="submit">
           Log In
+        </button>
+        <button className="" type="">
+          <Link to="/register"> Register </Link>
         </button>
       </form>
     </div>

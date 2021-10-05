@@ -1,8 +1,21 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
+const bodyParser = require("body-parser");
 const userRoute = require("./routes/usersRoute");
 const todoRoute = require("./routes/todoRoute");
 const mongoose = require("mongoose");
+
+app.use(
+  cors({
+    origin: "http://127.0.0.1:3000",
+  })
+);
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 mongoose.connect("mongodb://localhost:27017/be3-todo", {
   useNewUrlParser: true,
