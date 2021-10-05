@@ -37,7 +37,7 @@ function Register() {
         "Content-Type": "application/json",
       },
     });
-    history.push("/");
+    history.push("/login");
   }
 
   return (

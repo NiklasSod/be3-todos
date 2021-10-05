@@ -1,5 +1,6 @@
 const User = require("./../models/users");
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 exports.showRegisterPage = (req, res) => {
   res.json({ message: "Hello from registerpage!" });
@@ -10,9 +11,6 @@ exports.registerUser = (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
-
-  
-  
   const newUser = new User({
     name,
     email,
@@ -37,5 +35,13 @@ exports.registerUser = (req, res) => {
         .catch((value) => console.log(value));
     });
   });
+};
+
+
+exports.loginUser = (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/todo',
+    failureRedirect: '/users/login',
+  })
 };
 
