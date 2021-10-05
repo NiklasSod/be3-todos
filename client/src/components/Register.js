@@ -10,7 +10,7 @@ function Register() {
   });
 
   useEffect(() => {
-    fetch("/register/")
+    fetch("http://localhost:3000/register")
       .then((res) => res.json())
       .then((data) => setUsers(data.message));
   });
