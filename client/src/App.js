@@ -8,6 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+      <h1>Niklas & Georgios Todo List!</h1>
         <Switch>
           <Route path="/todoPage/">
             <TodoPage />
