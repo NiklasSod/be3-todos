@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 
 exports.showRegisterPage = (req, res) => {
-  res.json({ message: "Hello from registerpage!" });
+  res.json({ message: "Please register!" });
 };
 
 exports.registerUser = (req, res) => {
