@@ -1,4 +1,3 @@
-import "./App.css";
 import Register from "./components/Register";
 import TodoPage from "./components/TodoPage";
 import Login from "./components/Login";
@@ -7,8 +6,8 @@ import { Switch, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      <h1>Niklas & Georgios Todo List!</h1>
+      <header>
+      <h1 className="App-header">Niklas & Georgios Todo List!</h1>
         <Switch>
           <Route path="/todoPage/">
             <TodoPage />
