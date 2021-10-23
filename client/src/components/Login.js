@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 import FetchKit from "../utils/fetchKit";
 
 
@@ -18,25 +18,28 @@ function Login() {
     }
   }, [history]);
 
-  function handleOnChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  
 
   function handleOnSubmit(e) {
     e.preventDefault();
     
     FetchKit.loginFetch(formData)
     .then((res) => res.json())
-  .then((item) => {
-    if (item) {
-      localStorage.setItem("token", item.token);
-      history.push("/todoPage");
-    }
-  });
-}
+    .then((item) => {
+      if (item) {
+        localStorage.setItem("token", item.token);
+        history.push("/todoPage");
+      }
+    });
+  }
   
+const handleOnChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
   return (
     <>
+    <Col md={{ span: 8, offset: 3 }} className="colorBackground lightText mt-5 p-5 rounded shadow">
     <div className="container">
       <h1 className="ml-2 mt-5">Please log in to create your first Todo list!</h1>
       <Form onSubmit={handleOnSubmit}>
@@ -71,7 +74,8 @@ function Login() {
           <Link to="/register"> Register </Link>
         </Button>
       </Form>
-    </div>        
+    </div>
+    </Col>       
     </>
   );
 }

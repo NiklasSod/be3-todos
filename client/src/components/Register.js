@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory, Link } from "react-router-dom";
-import { Button, Form }from "react-bootstrap";
+import { Button, Form, Col }from "react-bootstrap";
 import FetchKit from "../utils/fetchKit";
 
 function Register() {
@@ -20,13 +20,14 @@ function Register() {
       .then((item) => {
         if (item) {
           localStorage.setItem("token", item.token);
-          history.push("/");
+          history.push("/todoPage");
         }
       });
   };
 
   return (
     <>
+    <Col md={{ span: 8, offset: 3 }} className="colorBackground lightText mt-5 p-5 rounded shadow">
       <h1 className="ml-2 mt-2">Please register!</h1>
       <br />
       <div className="container">
@@ -70,11 +71,12 @@ function Register() {
         <Button variant="primary" type="submit">
           Register
         </Button>
-        <Button className="m-4" variant="outline-primary" type="" size="lg">
+        <Button className="m-4" variant="outline-warning" type="" size="lg">
           <Link to="/login"> Login </Link>
         </Button>
       </Form>
       </div>
+      </Col>
     </>
   );
 }

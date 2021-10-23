@@ -10,15 +10,15 @@ const generateToken = (user) => {
 };
 
 const signupUser = async (req, res, next) => {
-  const { fullName, password, email, phoneNumber, deliveryAddress } = req.body;
+  const { name, password, email } = req.body;
 
-  const user = await UserModel.exists({ email });
+  const user = await  UserModel.exists({ email });
 
   if (!user) {
     bcrypt.hash(password, salt, (error, hash) => {
       if (error) res.status(500);
       const newUser = new UserModel({
-        Name,
+        name,
         password: hash,
         email,
       });

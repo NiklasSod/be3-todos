@@ -1,5 +1,5 @@
 const express = require("express");
-router = express.Router();
+const router = express.Router();
 const { verify } = require("../config/auth");
 const {
     signupUser,

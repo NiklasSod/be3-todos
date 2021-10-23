@@ -30,3 +30,8 @@ code {
 .App-link {
   color: #61dafb;
 }
+
+.colorBackground {
+  background-color: #679e8060;
+  border: none;
+}

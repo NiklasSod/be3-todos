@@ -13,7 +13,7 @@ export default class FetchKit{
         })
     }
     static registerFetch = (formData) => {
-        const url = "http://localhost:3000/api/usersRoute/signup" 
+        const url = "http://localhost:3000/api/usersRoute/signup"; 
 
         return fetch(url, {
             method: "POST", 
