@@ -1,6 +1,6 @@
 export default class FetchKit{
     static loginFetch = (formData) => {
-        const url = "http://localhost:3000/api/usersRoute/login" 
+        const url = "http://localhost:3000/api/usersRoute/signin"; 
 
         return fetch(url, {
             method: "POST", 
@@ -13,7 +13,7 @@ export default class FetchKit{
         })
     }
     static registerFetch = (formData) => {
-        const url = "http://localhost:3000/api/usersRoute/register" 
+        const url = "http://localhost:3000/api/usersRoute/signup" 
 
         return fetch(url, {
             method: "POST", 

@@ -6,29 +6,29 @@ const secretToken = process.env.SECRET_TOKEN;
 const salt = Number(process.env.SALT);
 
 const generateToken = (user) => {
-  return jwt.sign({ data: user }, secretToken, { expiresIn: "2"});
+  return jwt.sign({ data: user }, secretToken, { expiresIn: "2h" });
 };
 
-const registerUser = async (req, res) => {
-  const { name, email, password} = req.body;
+const signupUser = async (req, res, next) => {
+  const { fullName, password, email, phoneNumber, deliveryAddress } = req.body;
 
-  const user = await UserModel.exist({ email });
+  const user = await UserModel.exists({ email });
 
   if (!user) {
     bcrypt.hash(password, salt, (error, hash) => {
-      if(error) res.status(500);
+      if (error) res.status(500);
       const newUser = new UserModel({
-        name,
-        email,
+        Name,
         password: hash,
+        email,
       });
       newUser
         .save()
         .then((user) => {
-          res.status(201).json({token: generateToken(user._id) });
+          res.status(201).json({ token: generateToken(user._id) });
         })
         .catch((err) => {
-          res.status(400).json({ msg: err.message});
+          res.status(400).json({ msg: err.message });
         });
     });
   } else {
@@ -36,20 +36,21 @@ const registerUser = async (req, res) => {
   }
 };
 
-  const loginUser = (req, res) => {
-    const { email, password } = req.body;
+const signInUser = (req, res, next) => {
+  const { email, password } = req.body;
 
-    UserModel.findOne({ email }).exec((err, user) => {
-      if (user){
-    bcrypt.compare(password, user.password, (error, match) => {
-      if (error) res.status(500).json({ msg: error });
-      else if (match) res.status(200).json({ token: generateToken(user._id)});
-      else res.status(403).json({ msg: "Wrong email or password" });
-    });
-  } else {
-    res.status(403).json({ msg: "Wrong email or password" });
-  }
-});
+  UserModel.findOne({ email }).exec((err, user) => {
+    if (user) {
+      bcrypt.compare(password, user.password, (error, match) => {
+        if (error) res.status(500).json({ msg: error });
+        else if (match)
+          res.status(200).json({ token: generateToken(user._id) });
+        else res.status(403).json({ msg: "wrong email or password" });
+      });
+    } else {
+      res.status(403).json({ msg: "wrong email or password" });
+    }
+  });
 };
 
 const getUser = async (req, res, next) => {
@@ -62,23 +63,4 @@ const getUser = async (req, res, next) => {
   }
 };
 
-// const updateUser = (req, res) => {
-//   const id = req.user;
-//   const{ name, email, password } = req.body;
-//   try {
-//     UserModel.findOneAndUpdate(
-//       id,
-//       { name, email },
-//       { returnOriginal: false }
-//     )
-//       .then((user) => {
-//         user.password = null;
-//         res.status(200).json({ user });
-//       })
-//         .catch((err) => res.status(500).json({ msg: err.message}));
-//   }catch (err) {
-//     res.status(400).json({ message: err.message });
-//   }
-// };
-
-module.exports = { registerUser, loginUser, getUser, updateUser };
+module.exports = { signupUser, signInUser, getUser};

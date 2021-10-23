@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
 import FetchKit from "../utils/fetchKit";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 
 function Login() {
