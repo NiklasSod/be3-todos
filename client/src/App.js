@@ -2,6 +2,8 @@ import Register from "./components/Register";
 import TodoPage from "./components/TodoPage";
 import Login from "./components/Login";
 import { Switch, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+import "./index.css";
 
 function App() {
   return (
