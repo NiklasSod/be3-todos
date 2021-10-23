@@ -1,39 +1,39 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
-const bodyParser = require("body-parser");
-const userRoute = require("./routes/usersRoute");
-const todoRoute = require("./routes/todoRoute");
-const mongoose = require("mongoose");
+// const express = require("express");
+// const cors = require("cors");
+// const app = express();
+// const bodyParser = require("body-parser");
+// const userRoute = require("./routes/usersRoute");
+// const todoRoute = require("./routes/todoRoute");
+// const mongoose = require("mongoose");
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+// // parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false }));
 
-// parse application/json
-app.use(bodyParser.json());
+// // parse application/json
+// app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/be3-todo", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect("mongodb://localhost:27017/be3-todo", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Connected to MongoDB");
-});
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "connection error:"));
+// db.once("open", () => {
+//   console.log("Connected to MongoDB");
+// });
 
-const port = process.env.PORT || 3001;
+// const port = process.env.PORT || 3001;
 
-app.use("/todo", todoRoute);
-app.use("/", userRoute);
+// app.use("/todo", todoRoute);
+// app.use("/", userRoute);
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`App listening at http://localhost:${port}`);
+// });

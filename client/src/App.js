@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header>
-      <h1 className="App-header">Niklas & Georgios Todo List!</h1>
+      <h1 className="App-header">Todo List!</h1>
         <Switch>
           <Route path="/todoPage/">
             <TodoPage />

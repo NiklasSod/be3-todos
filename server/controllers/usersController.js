@@ -1,47 +1,84 @@
-const User = require("../models/users");
-const bcrypt = require('bcrypt');
-const passport = require('passport');
+const UserModel = require("../models/UsersModel");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-exports.showRegisterPage = (req, res) => {
-  res.json({ message: "Please register!" });
+const secretToken = process.env.SECRET_TOKEN;
+const salt = Number(process.env.SALT);
+
+const generateToken = (user) => {
+  return jwt.sign({ data: user }, secretToken, { expiresIn: "2"});
 };
 
-exports.registerUser = (req, res) => {
-  let name = req.body.name;
-  let email = req.body.email;
-  let password = req.body.password;
+const registerUser = async (req, res) => {
+  const { name, email, password} = req.body;
 
-  const newUser = new User({
-    name,
-    email,
-    password,
-  });
+  const user = await UserModel.exist({ email });
 
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) console.log(err);
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if (err) throw err;
-      //Save pass to hash
-      newUser.password = hash;
-      //Save user
+  if (!user) {
+    bcrypt.hash(password, salt, (error, hash) => {
+      if(error) res.status(500);
+      const newUser = new UserModel({
+        name,
+        email,
+        password: hash,
+      });
       newUser
         .save()
-        .then((value) => {
-          console.log('The following user was created:');
-          console.log(value);
-          const message = 'You have successfuly registered!';
-          res.render('login', { message });
+        .then((user) => {
+          res.status(201).json({token: generateToken(user._id) });
         })
-        .catch((value) => console.log(value));
+        .catch((err) => {
+          res.status(400).json({ msg: err.message});
+        });
     });
-  });
+  } else {
+    res.status(400).json({ msg: "Email already in use" });
+  }
 };
 
+  const loginUser = (req, res) => {
+    const { email, password } = req.body;
 
-exports.loginUser = (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/todo',
-    failureRedirect: '/users/login',
-  })
+    UserModel.findOne({ email }).exec((err, user) => {
+      if (user){
+    bcrypt.compare(password, user.password, (error, match) => {
+      if (error) res.status(500).json({ msg: error });
+      else if (match) res.status(200).json({ token: generateToken(user._id)});
+      else res.status(403).json({ msg: "Wrong email or password" });
+    });
+  } else {
+    res.status(403).json({ msg: "Wrong email or password" });
+  }
+});
 };
 
+const getUser = async (req, res, next) => {
+  const id = req.user;
+  try {
+    const user = await UserModel.findById(id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+// const updateUser = (req, res) => {
+//   const id = req.user;
+//   const{ name, email, password } = req.body;
+//   try {
+//     UserModel.findOneAndUpdate(
+//       id,
+//       { name, email },
+//       { returnOriginal: false }
+//     )
+//       .then((user) => {
+//         user.password = null;
+//         res.status(200).json({ user });
+//       })
+//         .catch((err) => res.status(500).json({ msg: err.message}));
+//   }catch (err) {
+//     res.status(400).json({ message: err.message });
+//   }
+// };
+
+module.exports = { registerUser, loginUser, getUser, updateUser };

@@ -53,7 +53,6 @@ function Register() {
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Name</Form.Label>
           <Form.Control           
-            // id="name"
             name="name"
             onChange={handleOnChange}
             value={formData.name}
@@ -68,7 +67,6 @@ function Register() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control 
-            // id="email"
             name="email"
             onChange={handleOnChange}
             value={formData.email}
@@ -84,13 +82,13 @@ function Register() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control 
-          // id="password"
           name="password"
           onChange={handleOnChange}
           value={formData.password}
           className="col-md-5"
           type="password"
-          placeholder="Password" />
+          placeholder="Password" 
+          />
         </Form.Group>
         <Button variant="primary" type="submit">
           Register
