@@ -30,7 +30,8 @@ function Login() {
       <Form onSubmit={handleOnSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control id="email"
+          <Form.Control 
+            // id="email"
             name="email"
             onChange={handleOnChange}
             value={formData.email} 
@@ -45,7 +46,7 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control 
-            id="password"
+            // id="password"
             name="password"
             onChange={handleOnChange}
             value={formData.password}
