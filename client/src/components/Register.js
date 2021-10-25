@@ -1,63 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-// import Container from 'react-bootstrap/Container';
+import React from "react";
+import { useHistory, Link } from "react-router-dom";
+import { Button, Form, Col }from "react-bootstrap";
+import FetchKit from "../utils/fetchKit";
 
 function Register() {
-  const [setData, getData] = useState([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  useEffect(() => {
-    fetch("http://localhost:3001/register/")
-      .then((res) => res.json())
-      .then((data) => getData(data.message));
-  });
-
-  function handleOnChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-
   const history = useHistory();
 
   function handleOnSubmit(e) {
     e.preventDefault();
 
-    const payload = {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
+    const formData = {
+      name: e.target[0].value,
+      email: e.target[1].value,
+      password: e.target[2].value,
     };
 
-    fetch("http://localhost:3001/register/", {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    history.push("/login");
-  }
+    FetchKit.registerFetch(formData)
+      .then((res) => res.json())
+      .then((item) => {
+        if (item) {
+          localStorage.setItem("token", item.token);
+          history.push("/login");
+        }
+      });
+  };
 
   return (
     <>
-      <p>{!setData ? "Loading..." : setData}</p>
+    <Col md={{ span: 8, offset: 3 }} className="colorBackground lightText mt-5 p-5 rounded shadow">
       <h1 className="ml-2 mt-2">Please register!</h1>
       <br />
       <div className="container">
       <Form onSubmit={handleOnSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicText">
+        <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control           
-            // id="name"
-            name="name"
-            onChange={handleOnChange}
-            value={formData.name}
             className="col-md-5"
+            name="name"
+            required
             type="text" 
             placeholder="Enter your name"
           />
@@ -68,11 +48,9 @@ function Register() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control 
-            // id="email"
-            name="email"
-            onChange={handleOnChange}
-            value={formData.email}
             className="col-md-5"
+            name="email"
+            required
             type="email" 
             placeholder="Enter email" 
           />
@@ -84,19 +62,21 @@ function Register() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control 
-          // id="password"
-          name="password"
-          onChange={handleOnChange}
-          value={formData.password}
           className="col-md-5"
+          name="password"
           type="password"
-          placeholder="Password" />
+          placeholder="Password" 
+          />
         </Form.Group>
         <Button variant="primary" type="submit">
           Register
         </Button>
+        <Button className="m-4" variant="outline-warning" type="" size="lg">
+          <Link to="/login"> Login </Link>
+        </Button>
       </Form>
       </div>
+      </Col>
     </>
   );
 }
