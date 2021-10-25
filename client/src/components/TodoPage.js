@@ -8,7 +8,7 @@ function TodoPage() {
   }, []);
 
   async function getData() {
-    const response = await fetch("http://localhost:3001/todo/");
+    const response = await fetch("http://localhost:5000/api/todoRoute/");
     const data = await response.json();
 
     setTodo(data.message);

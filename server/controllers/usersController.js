@@ -11,6 +11,7 @@ const generateToken = (user) => {
 
 const signupUser = async (req, res, next) => {
   const { name, password, email } = req.body;
+  console.log(req.body.name)
 
   const user = await  UserModel.exists({ email });
 
@@ -63,4 +64,5 @@ const getUser = async (req, res, next) => {
   }
 };
 
-module.exports = { signupUser, signInUser, getUser};
+
+module.exports = { signupUser, signInUser, getUser };

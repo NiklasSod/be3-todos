@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon server"
+    "start": "nodemon app"
   },
   "author": "Niklas. Georgios",
   "liveshare.guestApprovalRequired": true,
@@ -19,5 +18,8 @@
     "mongoose": "^6.0.8",
     "morgan": "^1.10.0",
     "passport": "^0.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
   }
 }

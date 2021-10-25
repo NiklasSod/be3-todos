@@ -20,7 +20,7 @@ function Register() {
       .then((item) => {
         if (item) {
           localStorage.setItem("token", item.token);
-          history.push("/todoPage");
+          history.push("/login");
         }
       });
   };
@@ -32,7 +32,7 @@ function Register() {
       <br />
       <div className="container">
       <Form onSubmit={handleOnSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicText">
+        <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control           
             className="col-md-5"
