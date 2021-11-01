@@ -20,7 +20,7 @@ function Register() {
       .then((item) => {
         if (item) {
           localStorage.setItem("token", item.token);
-          history.push("/login");
+          history.push("/todoPage");
         }
       });
   };

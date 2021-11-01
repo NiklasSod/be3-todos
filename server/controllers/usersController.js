@@ -13,7 +13,7 @@ const signupUser = async (req, res, next) => {
   const { name, password, email } = req.body;
   console.log(req.body.name)
 
-  const user = await  UserModel.exists({ email });
+  const user = await UserModel.exists({ email });
 
   if (!user) {
     bcrypt.hash(password, salt, (error, hash) => {
@@ -44,9 +44,9 @@ const signInUser = (req, res, next) => {
     if (user) {
       bcrypt.compare(password, user.password, (error, match) => {
         if (error) res.status(500).json({ msg: error });
-        else if (match)
+        if (match) {
           res.status(200).json({ token: generateToken(user._id) });
-        else res.status(403).json({ msg: "wrong email or password" });
+        } else res.status(403).json({ msg: "wrong email or password" });
       });
     } else {
       res.status(403).json({ msg: "wrong email or password" });

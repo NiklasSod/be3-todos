@@ -1,3 +1,3 @@
 exports.todoPage = (req, res) => {
-  res.json({ message: "Hello from todopage!" });
+  res.json({ message: "Hello from todoroute!" });
 };
