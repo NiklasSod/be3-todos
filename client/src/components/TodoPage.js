@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function TodoPage() {
-  const [todo, setTodo] = useState(null);
+  const [todos, setTodo] = useState(null);
 
   useEffect(() => {
     getData();
@@ -10,26 +10,28 @@ function TodoPage() {
   async function getData() {
     const response = await fetch("http://localhost:5000/api/todoRoute/");
     const data = await response.json();
-
-    setTodo(data.message);
+    setTodo(data);
   }
+
+  const showTodos = () => {
+    return (
+      todos.data.map((todo) => (
+        <div className="col m-3" key={todo._id}>
+          {todo.header}
+        </div>
+      ))
+    );
+  };
 
   return (
     <div>
-      <p>{!todo ? "Loading..." : todo}</p>
-    <form>
-      <input type="text" className="todo-input"/>
-      <button className="todo-button" type="submit">
-        <i className="fas fa-plus-square"></i>
-      </button>
-      <div className="select">
-        <select name="todos" className="filter-todo">
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
-        </select>
-      </div>
-    </form>
+      {!todos ? "Loading..." : showTodos()}
+      <form>
+        <input type="text" className="todo-input"/>
+        <button className="todo-button" type="submit">
+          <i className="fas fa-plus-square"></i>
+        </button>
+      </form>
     </div>
   );
 }
