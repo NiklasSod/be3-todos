@@ -1,18 +1,57 @@
+// remember to change all "fake" userId's
+
 const Todo = require("../models/todoModel");
 
 exports.todoPage = async (req, res) => {
-  // const id = req.user;
-  // try {
-  //   const todo = await UserModel.findById(id);
-  //   res.status(200).json(user);
-  // } catch (err) {
-  //   res.status(404).json({ message: err.message });
-  // }
+  try {
+    const allTodos = await Todo.find({ userId: '618001e878adaa5f22f8b2e8' });
+    res.status(200).json({ data: allTodos });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.todoDetailPage = async (req, res) => {
+  try {
+    const oneTodo = await Todo.findOne({ _id: req.params.id });
+    res.status(200).json({ data: oneTodo });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 exports.addNewTodo = async (req, res) => {
-  const { header, content } = req.body;
-  await new Todo({ header, content, userId: '618001e878adaa5f22f8b2e8' }).save();
-  // await Todo.find({ userId: '618001e878adaa5f22f8b2e8' });
-  res.status(200).json({ data: "hej" });
+  try {
+    const { header, content } = req.body;
+    await new Todo({ header, content, userId: '618001e878adaa5f22f8b2e8' }).save();
+    const allTodos = await Todo.find({ userId: '618001e878adaa5f22f8b2e8' });
+    res.status(200).json({ data: allTodos });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+exports.deleteTodo = async (req, res) => {
+  try {
+    const removedItem = await Todo.findOneAndDelete({ _id: req.params.id });
+    if (!removedItem) {
+      res.status(400).json({ message: 'this todo does not exist' });
+    }
+    res.status(200).json({ message: 'todo successfully deleted' });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+exports.updateTodo = async (req, res) => {
+  try {
+    const { header, content } = req.body;
+    const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, {
+      header, content, userId: '618001e878adaa5f22f8b2e8'
+    }, { new: true });
+
+    res.status(200).json({ data: updatedTodo });
+  } catch (error) {
+    console.error(error);
+  }
 }

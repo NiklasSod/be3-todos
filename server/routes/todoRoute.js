@@ -5,6 +5,9 @@ usersRoute = require("../controllers/todoController");
 router = express.Router();
 
 router.get("/", usersRoute.todoPage);
+router.get("/:id", usersRoute.todoDetailPage);
 router.post("/", usersRoute.addNewTodo);
+router.delete("/:id", usersRoute.deleteTodo);
+router.post("/:id", usersRoute.updateTodo);
 
 module.exports = router;
