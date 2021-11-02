@@ -16,8 +16,7 @@ function TodoPage() {
 
   return (
     <div>
-      <p>Here is todos!</p>
-      <p>{!todo ? "test-string" : todo}</p>
+      <p>{!todo ? "Loading..." : todo}</p>
     <form>
       <input type="text" className="todo-input"/>
       <button className="todo-button" type="submit">
