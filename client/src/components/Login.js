@@ -14,7 +14,7 @@ function Login() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token && token !== "undefined") {
-      history.push("/");
+      history.push("/todoPage");
     }
   }, [history]);
 
