@@ -16,17 +16,17 @@ export default function EditTodo(props) {
       </Modal.Header>
       <Modal.Body>
         <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">
+          <div className="form-group">
+            <label htmlFor="recipient-name" className="col-form-label">
               Header:
             </label>
-            <input type="text" class="form-control" id="recipient-name" />
+            <input type="text" className="form-control" id="recipient-name" />
           </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">
+          <div className="form-group">
+            <label htmlFor="message-text" className="col-form-label">
               Content:
             </label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea className="form-control" id="message-text"></textarea>
           </div>
         </form>
       </Modal.Body>
