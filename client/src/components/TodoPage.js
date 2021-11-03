@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Accordion, Alert } from "react-bootstrap";
+import { Accordion, Alert, Button } from "react-bootstrap";
 
 function TodoPage() {
   const [todos, setTodo] = useState(null);
@@ -24,6 +24,10 @@ function TodoPage() {
               <Alert variant="primary">
                 <p>{`Content: ${todo.content}`}</p>
               </Alert>
+              <div className="d-flex justify-content-around">
+                <Button className="btn-primary btn-sm">Edit</Button>
+                <Button className="btn-danger btn-sm">Delete</Button>
+              </div>
             </div>
           </Accordion.Body>
         </Accordion.Item>
