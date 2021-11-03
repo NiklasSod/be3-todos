@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Accordion, Alert, Button } from "react-bootstrap";
+import axios from 'axios';
 
 function TodoPage() {
   const [todos, setTodo] = useState(null);
@@ -7,6 +8,10 @@ function TodoPage() {
   useEffect(() => {
     getData();
   }, []);
+
+  const deleteTodo = (id) => {
+    axios.delete(`http://127.0.0.1:5000/api/todoroute/${id}`)
+  }
 
   async function getData() {
     const response = await fetch("http://localhost:5000/api/todoRoute/");
@@ -26,7 +31,7 @@ function TodoPage() {
               </Alert>
               <div className="d-flex justify-content-around">
                 <Button className="btn-primary btn-sm">Edit</Button>
-                <Button className="btn-danger btn-sm">Delete</Button>
+                <Button type="submit" className="btn-danger btn-sm" onClick={() => deleteTodo(todo._id)}>Delete</Button>
               </div>
             </div>
           </Accordion.Body>

@@ -33,7 +33,8 @@ exports.addNewTodo = async (req, res) => {
 
 exports.deleteTodo = async (req, res) => {
   try {
-    const removedItem = await Todo.findOneAndDelete({ _id: req.params.id });
+    const id = req.params.id;
+    const removedItem = await Todo.findOneAndDelete({ _id: id });
     if (!removedItem) {
       res.status(400).json({ message: 'this todo does not exist' });
     }
