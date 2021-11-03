@@ -22,7 +22,8 @@ exports.todoDetailPage = async (req, res) => {
 
 exports.addNewTodo = async (req, res) => {
   try {
-    const { header, content } = req.body;
+    const { header } = req.body;
+    const content = "Edit to add content!";
     await new Todo({ header, content, userId: '618001e878adaa5f22f8b2e8' }).save();
     const allTodos = await Todo.find({ userId: '618001e878adaa5f22f8b2e8' });
     res.status(200).json({ data: allTodos });

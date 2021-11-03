@@ -5,6 +5,21 @@ import axios from 'axios';
 function TodoPage() {
   const [todos, setTodo] = useState(null);
 
+  const [formData, setFormData] = useState({
+    header: "",
+  });
+
+  const handleOnChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  function handleOnSubmit(e) {
+    e.preventDefault();
+    axios.post('http://127.0.0.1:5000/api/todoroute/', {
+      header: formData.header,
+    })
+  }
+
   useEffect(() => {
     getData();
   }, []);
@@ -42,8 +57,15 @@ function TodoPage() {
 
   return (
     <div>
-      <form className="m-5">
-        <input type="text" className="todo-input" />
+      <form className="m-5" onSubmit={handleOnSubmit}>
+        <input 
+        type="text" 
+        className="todo-input" 
+        name="header" 
+        placeholder="Enter todo header" 
+        onChange={handleOnChange}
+        value={formData.header}
+        />
         <button className="todo-button" type="submit">
           <i className="fas fa-plus-square"></i>
         </button>
