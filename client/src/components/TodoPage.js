@@ -48,6 +48,7 @@ function TodoPage() {
             <div className="label">
               <Alert variant="primary">
                 <p>{`Content: ${todo.content}`}</p>
+                <p>{`Date created: ${todo.date.toLocaleString().split('T')[0]}`}</p>
               </Alert>
               <div className="d-flex justify-content-around">
                 <Button
