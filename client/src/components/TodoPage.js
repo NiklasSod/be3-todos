@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Accordion, Alert, Button } from "react-bootstrap";
 import axios from "axios";
+import EditTodo from "./EditTodo";
 
 function TodoPage() {
   const history = useHistory();
   const [todos, setTodo] = useState(null);
-
+  const [modalShow, setModalShow] = useState(false);
   const [formData, setFormData] = useState({
     header: "",
   });
@@ -49,7 +50,13 @@ function TodoPage() {
                 <p>{`Content: ${todo.content}`}</p>
               </Alert>
               <div className="d-flex justify-content-around">
-                <Button className="btn-primary btn-sm">Edit</Button>
+                <Button
+                  className="btn-primary btn-sm"
+                  onClick={() => setModalShow(true)}
+                >
+                  Edit
+                </Button>
+                <EditTodo show={modalShow} onHide={() => setModalShow(false)} />
                 <Button
                   type="submit"
                   className="btn-danger btn-sm"
