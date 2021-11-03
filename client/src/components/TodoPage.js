@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Accordion, Alert, Button } from "react-bootstrap";
-import axios from 'axios';
+import axios from "axios";
 
 function TodoPage() {
+  const history = useHistory();
   const [todos, setTodo] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -15,9 +17,10 @@ function TodoPage() {
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    axios.post('http://127.0.0.1:5000/api/todoroute/', {
+    axios.post("http://127.0.0.1:5000/api/todoroute/", {
       header: formData.header,
-    })
+    });
+    history.go(0);
   }
 
   useEffect(() => {
@@ -25,8 +28,9 @@ function TodoPage() {
   }, []);
 
   const deleteTodo = (id) => {
-    axios.delete(`http://127.0.0.1:5000/api/todoroute/${id}`)
-  }
+    axios.delete(`http://127.0.0.1:5000/api/todoroute/${id}`);
+    history.go(0);
+  };
 
   async function getData() {
     const response = await fetch("http://localhost:5000/api/todoRoute/");
@@ -46,7 +50,13 @@ function TodoPage() {
               </Alert>
               <div className="d-flex justify-content-around">
                 <Button className="btn-primary btn-sm">Edit</Button>
-                <Button type="submit" className="btn-danger btn-sm" onClick={() => deleteTodo(todo._id)}>Delete</Button>
+                <Button
+                  type="submit"
+                  className="btn-danger btn-sm"
+                  onClick={() => deleteTodo(todo._id)}
+                >
+                  Delete
+                </Button>
               </div>
             </div>
           </Accordion.Body>
@@ -58,13 +68,13 @@ function TodoPage() {
   return (
     <div>
       <form className="m-5" onSubmit={handleOnSubmit}>
-        <input 
-        type="text" 
-        className="todo-input" 
-        name="header" 
-        placeholder="Enter todo header" 
-        onChange={handleOnChange}
-        value={formData.header}
+        <input
+          type="text"
+          className="todo-input"
+          name="header"
+          placeholder="Enter todo header"
+          onChange={handleOnChange}
+          value={formData.header}
         />
         <button className="todo-button" type="submit">
           <i className="fas fa-plus-square"></i>
