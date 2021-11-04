@@ -94,7 +94,7 @@ function TodoPage() {
         </button>
       </form>
       {!todos ? "Loading..." : <div> {showTodos()} </div>}
-      <EditTodo show={modalShow} showTodo={modalTodo} onHide={() => setModalShow(false)} />
+      <EditTodo show={modalShow} showtodo={modalTodo} onHide={() => setModalShow(false)} />
     </div>
   );
 }
