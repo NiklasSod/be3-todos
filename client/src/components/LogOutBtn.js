@@ -11,6 +11,7 @@ export default function LogOutBtn() {
     e.preventDefault();
     localStorage.removeItem('token');
     history.push('/login');
+    history.go(0);
   }
 
   const showLogoutBtn = () => {
