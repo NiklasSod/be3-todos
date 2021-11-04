@@ -20,13 +20,13 @@ export default function EditTodo(props) {
             <label htmlFor="recipient-name" className="col-form-label">
               Header:
             </label>
-            <input type="text" className="form-control" id="recipient-name" />
+            <input type="text" className="form-control" id="recipient-name" value={!props.showTodo ? "Loading..." : props.showTodo.header } />
           </div>
           <div className="form-group">
             <label htmlFor="message-text" className="col-form-label">
               Content:
             </label>
-            <textarea className="form-control" id="message-text"></textarea>
+            <textarea className="form-control" id="message-text">{!props.showTodo ? "Loading..." : props.showTodo.content }</textarea>
           </div>
         </form>
       </Modal.Body>

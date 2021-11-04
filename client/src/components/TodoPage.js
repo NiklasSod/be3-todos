@@ -8,6 +8,7 @@ function TodoPage() {
   const history = useHistory();
   const [todos, setTodo] = useState(null);
   const [modalShow, setModalShow] = useState(false);
+  const [modalTodo, setModalTodo] = useState();
   const [formData, setFormData] = useState({
     header: "",
   });
@@ -22,6 +23,11 @@ function TodoPage() {
       header: formData.header,
     });
     history.go(0);
+  }
+
+  const expandModal = (correctTodo) => {
+    setModalShow(true);
+    setModalTodo(correctTodo);
   }
 
   useEffect(() => {
@@ -53,11 +59,10 @@ function TodoPage() {
               <div className="d-flex justify-content-around">
                 <Button
                   className="btn-primary btn-sm"
-                  onClick={() => setModalShow(true)}
+                  onClick={() => expandModal(todo)}
                 >
                   Edit
                 </Button>
-                <EditTodo show={modalShow} onHide={() => setModalShow(false)} />
                 <Button
                   type="submit"
                   className="btn-danger btn-sm"
@@ -89,6 +94,7 @@ function TodoPage() {
         </button>
       </form>
       {!todos ? "Loading..." : <div> {showTodos()} </div>}
+      <EditTodo show={modalShow} showTodo={modalTodo} onHide={() => setModalShow(false)} />
     </div>
   );
 }
