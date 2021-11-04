@@ -3,7 +3,6 @@ import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
 export default function EditTodo(props) {
-
   const [formOneData, setFormOneData] = useState({
     header: !props.showtodo ? "" : props.showtodo.header,
     content: !props.showtodo ? "" : props.showtodo.content,
@@ -18,7 +17,7 @@ export default function EditTodo(props) {
       header: formOneData.header,
       content: formOneData.content,
     });
-  } 
+  }
 
   return (
     <Modal
@@ -38,18 +37,44 @@ export default function EditTodo(props) {
             <label htmlFor="recipient-name" className="col-form-label">
               Header:
             </label>
-            <input onChange={handleOnUpdate} name="header" type="text" className="form-control" id="recipient-name" defaultValue={!props.showtodo ? "Loading..." : props.showtodo.header } />
+            <input
+              onChange={handleOnUpdate}
+              name="header"
+              type="text"
+              className="form-control"
+              id="recipient-name"
+              defaultValue={
+                !props.showtodo ? "Loading..." : props.showtodo.header
+              }
+            />
           </div>
           <div className="form-group">
             <label htmlFor="message-text" className="col-form-label">
               Content:
             </label>
-            <textarea onChange={handleOnUpdate} name="content" className="form-control" id="message-text" defaultValue={!props.showtodo ? "Loading..." : props.showtodo.content }></textarea>
+            <textarea
+              onChange={handleOnUpdate}
+              name="content"
+              className="form-control"
+              id="message-text"
+              defaultValue={
+                !props.showtodo ? "Loading..." : props.showtodo.content
+              }
+            ></textarea>
           </div>
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => handleOnSave(!props.showtodo ? null : props.showtodo._id) } >Update</Button>
+        <Button
+          onClick={() => {
+            handleOnSave(!props.showtodo ? null : props.showtodo._id);
+            {
+              props.onHide;
+            }
+          }}
+        >
+          Update
+        </Button>
       </Modal.Footer>
     </Modal>
   );
