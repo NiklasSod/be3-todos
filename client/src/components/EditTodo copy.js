@@ -5,8 +5,8 @@ import axios from "axios";
 export default function EditTodo(props) {
 
   const [formOneData, setFormOneData] = useState({
-    header: !props.showtodo ? "" : props.showtodo.header,
-    content: !props.showtodo ? "" : props.showtodo.content,
+    header: "",
+    content: "",
   });
 
   const handleOnUpdate = (e) => {
