@@ -19,7 +19,7 @@ function TodoPage() {
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    axios.post("http://127.0.0.1:5000/api/todoroute/", {
+    axios.post("http://127.0.0.1:5000/api/todoRoute/", {
       header: formData.header,
     });
     history.go(0);
@@ -87,7 +87,6 @@ function TodoPage() {
           name="header"
           placeholder="Enter todo header"
           onChange={handleOnChange}
-          value={formData.header}
         />
         <button className="todo-button" type="submit">
           <i className="fas fa-plus-square"></i>
