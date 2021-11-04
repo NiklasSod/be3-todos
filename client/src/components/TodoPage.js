@@ -12,7 +12,7 @@ function TodoPage() {
   const [formData, setFormData] = useState({
     header: "",
   });
-
+  console.log(formData);
   const handleOnChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -28,7 +28,7 @@ function TodoPage() {
   const expandModal = (correctTodo) => {
     setModalShow(true);
     setModalTodo(correctTodo);
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -54,7 +54,9 @@ function TodoPage() {
             <div className="label">
               <Alert variant="primary">
                 <p>{`Content: ${todo.content}`}</p>
-                <p>{`Date created: ${todo.date.toLocaleString().split('T')[0]}`}</p>
+                <p>{`Date created: ${
+                  todo.date.toLocaleString().split("T")[0]
+                }`}</p>
               </Alert>
               <div className="d-flex justify-content-around">
                 <Button
@@ -93,7 +95,11 @@ function TodoPage() {
         </button>
       </form>
       {!todos ? "Loading..." : <div> {showTodos()} </div>}
-      <EditTodo show={modalShow} showtodo={modalTodo} onHide={() => setModalShow(false)} />
+      <EditTodo
+        show={modalShow}
+        showtodo={modalTodo}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 }
