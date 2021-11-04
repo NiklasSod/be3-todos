@@ -49,7 +49,7 @@ export default function EditTodo(props) {
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleOnSave(!props.showtodo ? null : props.showtodo._id), props.onHide } >Update</Button>
+        <Button onClick={() => handleOnSave(!props.showtodo ? null : props.showtodo._id) } >Update</Button>
       </Modal.Footer>
     </Modal>
   );
