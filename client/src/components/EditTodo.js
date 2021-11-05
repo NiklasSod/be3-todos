@@ -4,18 +4,13 @@ import axios from "axios";
 
 export default function EditTodo(props) {
   const [formOneData, setFormOneData] = useState({
-    // header: !props.showtodo ? "" : props.showtodo.header,
-    // content: !props.showtodo ? "" : props.showtodo.content,
   });
 
-  console.log("formOneData", formOneData);
-  console.log("props", props.showtodo);
   const handleOnUpdate = (e) => {
     setFormOneData({ ...formOneData, [e.target.name]: e.target.value });
   };
 
   function handleOnSave(id) {
-    // console.log("formOneData", formOneData);
     axios.post(`http://127.0.0.1:5000/api/todoroute/${id}`, {
       header: formOneData.header,
       content: formOneData.content,
@@ -23,7 +18,6 @@ export default function EditTodo(props) {
     history.go(0);
   }
 
-  // console.log("props", props.showtodo.header);
   return (
     <Modal
       {...props}

@@ -12,7 +12,6 @@ function TodoPage() {
   const [formData, setFormData] = useState({
     header: "",
   });
-  console.log(formData);
   const handleOnChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -53,7 +52,7 @@ function TodoPage() {
           <Accordion.Body id="accordionBody">
             <div className="label">
               <Alert variant="primary">
-                <p>{`Content: ${todo.content}`}</p>
+                <p>{todo.content}</p>
                 <p>{`Date created: ${
                   todo.date.toLocaleString().split("T")[0]
                 }`}</p>
