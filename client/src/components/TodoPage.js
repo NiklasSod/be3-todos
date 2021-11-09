@@ -53,7 +53,7 @@ function TodoPage() {
             <div className="label">
               <Alert variant="primary">
                 <p>{todo.content}</p>
-                <p>{`Date created: ${
+                <p className="mb-1" style={{fontSize: "11px"}}>{`Last updated: ${
                   todo.date.toLocaleString().split("T")[0]
                 }`}</p>
               </Alert>
@@ -86,6 +86,8 @@ function TodoPage() {
           type="text"
           className="todo-input"
           name="header"
+          minLength="1"
+          maxLength="40"
           placeholder="Enter todo header"
           onChange={handleOnChange}
         />

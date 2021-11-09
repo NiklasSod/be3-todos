@@ -4,6 +4,8 @@ import axios from "axios";
 
 export default function EditTodo(props) {
   const [formOneData, setFormOneData] = useState({
+    header: undefined,
+    content: undefined,
   });
 
   const handleOnUpdate = (e) => {
@@ -40,6 +42,8 @@ export default function EditTodo(props) {
               onChange={handleOnUpdate}
               name="header"
               type="text"
+              minLength="1"
+              maxLength="40"
               className="form-control"
               id="recipient-name"
               defaultValue={
@@ -54,6 +58,7 @@ export default function EditTodo(props) {
             <textarea
               onChange={handleOnUpdate}
               name="content"
+              maxLength="300"
               className="form-control"
               id="message-text"
               defaultValue={

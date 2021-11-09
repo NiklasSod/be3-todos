@@ -49,7 +49,7 @@ exports.updateTodo = async (req, res) => {
   try {
     const { header, content } = req.body;
     const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, {
-      header, content, userId: '618001e878adaa5f22f8b2e8'
+      header, content, userId: '618001e878adaa5f22f8b2e8', date: Date.now()
     }, { new: true });
 
     res.status(200).json({ data: updatedTodo });
