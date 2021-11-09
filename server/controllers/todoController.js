@@ -4,7 +4,7 @@ const Todo = require("../models/todoModel");
 
 exports.todoPage = async (req, res) => {
   try {
-    const allTodos = await Todo.find({ userId: '618001e878adaa5f22f8b2e8' });
+    const allTodos = await Todo.find();
     res.status(200).json({ data: allTodos });
   } catch (error) {
     console.error(error);
@@ -24,8 +24,8 @@ exports.addNewTodo = async (req, res) => {
   try {
     const { header } = req.body;
     const content = "Edit to add content!";
-    await new Todo({ header, content, userId: '618001e878adaa5f22f8b2e8' }).save();
-    const allTodos = await Todo.find({ userId: '618001e878adaa5f22f8b2e8' });
+    await new Todo({ header, content }).save();
+    const allTodos = await Todo.find();
     res.status(200).json({ data: allTodos });
   } catch (error) {
     console.error(error);
@@ -49,7 +49,7 @@ exports.updateTodo = async (req, res) => {
   try {
     const { header, content } = req.body;
     const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, {
-      header, content, userId: '618001e878adaa5f22f8b2e8', date: Date.now()
+      header, content, date: Date.now()
     }, { new: true });
 
     res.status(200).json({ data: updatedTodo });
