@@ -69,7 +69,7 @@ export default function EditTodo(props) {
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button
+        <Button disabled={true ? formOneData.header < 1 || formOneData.content < 1 : false}
           onClick={() => {
             handleOnSave(!props.showtodo ? null : props.showtodo._id);
             props.onHide();
