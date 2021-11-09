@@ -14,11 +14,11 @@ const todoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    require: true,
-  },
+  // userId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   require: true,
+  // },
 });
 
 module.exports = mongoose.model("Todo", todoSchema);
